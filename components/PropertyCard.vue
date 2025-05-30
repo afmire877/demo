@@ -5,9 +5,9 @@
     <NuxtLink :to="`/property/${property.slug.current}`" class="block">
       <!-- Property Image -->
       <div class="relative h-48 bg-gray-200">
-        <NuxtImg
+        <img
           v-if="property.image"
-          :src="urlFor(property.image).width(400).height(240).url()"
+          :src="getSanityImageUrl(property.image, 400, 240)"
           :alt="property.title"
           class="w-full h-full object-cover"
           loading="lazy"
@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { urlFor } from "~/lib/sanity";
+import { getSanityImageUrl } from "~/lib/sanity";
 
 defineProps({
   property: {

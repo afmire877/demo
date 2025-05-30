@@ -33,6 +33,34 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
+// Direct Sanity image URL generator (bypasses Netlify image optimization)
+export function getSanityImageUrl(
+  image: { asset?: { _ref?: string; _id?: string } },
+  width?: number,
+  height?: number
+) {
+  if (!image || !image.asset) return "";
+
+  const ref = image.asset._ref || image.asset._id;
+  if (!ref) return "";
+
+  // Extract image ID and extension from Sanity reference
+  const [, id, dimensions, format] =
+    ref.match(/image-([a-f\d]+)-(\d+x\d+)-(\w+)/) || [];
+
+  if (!id || !format) return "";
+
+  const baseUrl = `https://cdn.sanity.io/images/q1v8d4vo/production/${id}-${dimensions}.${format}`;
+  const params = new URLSearchParams();
+
+  if (width) params.append("w", width.toString());
+  if (height) params.append("h", height.toString());
+  params.append("fit", "crop");
+  params.append("crop", "center");
+
+  return `${baseUrl}?${params.toString()}`;
+}
+
 // Property type definition
 export interface Property {
   _id: string;

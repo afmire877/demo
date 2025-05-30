@@ -15,6 +15,15 @@ export default defineNuxtConfig({
     "@nuxt/icon",
   ],
 
+  // Image optimization configuration
+  image: {
+    domains: ["cdn.sanity.io"],
+    sanity: {
+      projectId: "q1v8d4vo",
+      dataset: "production",
+    },
+  },
+
   // SEO and Performance
   app: {
     head: {
@@ -42,7 +51,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       sanity: {
-        projectId: process.env.NUXT_SANITY_PROJECT_ID || "",
+        projectId: process.env.NUXT_SANITY_PROJECT_ID || "q1v8d4vo",
         dataset: process.env.NUXT_SANITY_DATASET || "production",
         apiVersion: process.env.NUXT_SANITY_API_VERSION || "2024-01-01",
         useCdn: true,

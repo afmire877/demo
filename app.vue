@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <NuxtRouteAnnouncer /> -->
     <AppHeader />
     <main>
       <NuxtPage />

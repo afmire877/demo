@@ -48,9 +48,9 @@
       <div
         class="relative h-64 md:h-96 rounded-lg overflow-hidden mb-8 bg-gray-200"
       >
-        <NuxtImg
+        <img
           v-if="data.image"
-          :src="urlFor(data.image).width(1200).height(600).url()"
+          :src="getSanityImageUrl(data.image, 1200, 600)"
           :alt="data.title"
           class="w-full h-full object-cover"
         />
@@ -176,7 +176,7 @@
 
 <script setup lang="ts">
 import type { Property } from "~/lib/sanity";
-import { urlFor } from "~/lib/sanity";
+import { getSanityImageUrl } from "~/lib/sanity";
 
 const route = useRoute();
 const slug = route.params.slug as string;
